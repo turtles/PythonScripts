@@ -10,3 +10,6 @@ def pointDistance(x1,y1,x2,y2):
 # Returns angle between two points in radians
 def pointAngle(x1,y1,x2,y2):
     return math.atan2(y2-y1, x2-x1)
+
+# Returns value within a range [_min, _max]. _min and _max are both inclusive.
+def clamp(value, _min, _max): return max(_min, min(_max, value))
