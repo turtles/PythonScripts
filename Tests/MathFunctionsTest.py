@@ -1,13 +1,23 @@
 from Math.MathFunctions import *
+import unittest
 
-def pointTest():
-    point1 = (0, 0)
-    point2 = (2, 4)
+class TestPointMethods(unittest.TestCase):
+    def test_point(self):
+        point1 = (0, 0)
+        point2 = (2, 4)
 
-    print("Point 1: {}".format(point1))
-    print("Point 2: {}".format(point2))
-    print("Point distance: {}".format(pointDistance(point1[0],point1[1],point2[0],point2[1])))
-    angle = pointAngle(point1[0],point1[1],point2[0],point2[1]);
-    print("Point angle: {:.3f}, {:.3f} degrees".format(angle, angle*RAD_TO_DEG))
+        angle = pointAngle(point1[0], point1[1], point2[0], point2[1])
+        dist = pointDistance(point1[0], point1[1], point2[0], point2[1])
 
-pointTest()
+        self.assertAlmostEqual(angle, 1.1071487177940904)
+        self.assertAlmostEqual(dist, 4.47213595499958)
+
+class TestHelperMethods(unittest.TestCase):
+    def test_clamp(self):
+        self.assertEqual(clamp(10, 1, 5), 5)
+        self.assertEqual(clamp(0, 1, 5), 1)
+        self.assertEqual(clamp(3, 1, 5), 3)
+        self.assertEqual(clamp(5, 1, 5), 5)
+
+if __name__ == '__main__':
+    unittest.main()
