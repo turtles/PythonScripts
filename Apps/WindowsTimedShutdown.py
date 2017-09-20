@@ -20,12 +20,18 @@ class ShutdownTimerApp:
         self.minutesEntry.grid(row=1,column=1)
 
         # Buttons
-        self.cancelButton = ttk.Button(parent, text="Cancel Shutdown",
+        self.cancelButton = ttk.Button(parent, text="[ESC] Cancel Shutdown",
                    command=self.cancel_shutdown)
         self.cancelButton.grid(row=2, column=0)
         self.startButton = ttk.Button(parent, text="Start Shutdown Timer",
                    command=self.shutdown)
         self.startButton.grid(row=2, column=1)
+
+        parent.bind('<KeyPress>', self.on_key_pressed)
+
+    def on_key_pressed(self, event):
+        if event.keycode == 27: # 27 = escape keycode
+            self.cancel_shutdown()
 
     def shutdown(self):
         try:
