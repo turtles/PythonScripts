@@ -12,16 +12,17 @@ extension = input("Extension to match: ")
 prefix = input("New filename prefix: ")
 
 # Scrub input
-extension = extension.replace('.','')
+extension = extension.replace('.', '')
 if not extension.isalnum():
     print("file extension must be alphanumeric")
     exit(1)
 
 if dir[len(dir)-1] != "\\":
-    dir+="\\"
+    dir += "\\"
 
 # Get files using the glob module
-# Create a separate directory variable for glob so we can reuse the original later
+# Create a separate directory variable for glob
+# so we can reuse the original later
 globdir = dir + "*." + extension
 files = glob.glob(globdir)
 
@@ -30,8 +31,9 @@ print("These changes will be made: ")
 
 increment = 1
 for file in files:
-    print("{} -> {}{}.{}".format(basename(file.title()), prefix, increment, extension))
-    increment+=1
+    print("{} -> {}{}.{}".format(basename(file.title()),
+                                 prefix, increment, extension))
+    increment += 1
 
 confirm = input("Type rename to confirm: ")
 if confirm != "rename":
@@ -42,7 +44,7 @@ if confirm != "rename":
 increment = 1
 for file in files:
     new_filename = "{}{}.{}".format(prefix, increment, extension)
-    os.rename(file, "{}{}".format(dir,new_filename))
+    os.rename(file, "{}{}".format(dir, new_filename))
     increment += 1
 
 print("Done!")
@@ -53,7 +55,7 @@ Example output
 Directory: C:\Python\imgs
 Extension to match: .jpg
 New filename prefix: kitty
-These changes will be made: 
+These changes will be made:
 Cat.Jpg -> kitty1.jpg
 Cat2.Jpg -> kitty2.jpg
 Type rename to confirm: rename

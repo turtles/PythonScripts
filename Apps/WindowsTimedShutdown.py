@@ -1,7 +1,9 @@
-from tkinter import *
+from tkinter import Tk
+from tkinter import StringVar
 from tkinter import ttk
 from tkinter import messagebox
 import os
+
 
 class ShutdownTimerApp:
     def __init__(self, parent):
@@ -9,35 +11,39 @@ class ShutdownTimerApp:
         self.minutesEntryValue = StringVar(parent, value="10")
 
         # Labels
-        self.titleLabel = ttk.Label(parent, text="Schedule the computer to power off")
+        titleLabelText = "Schedule the computer to power off"
+        self.titleLabel = ttk.Label(parent, text=titleLabelText)
         self.titleLabel.grid(row=0, column=0, columnspan=2)
 
         self.minutesLabel = ttk.Label(parent, text="Minutes")
-        self.minutesLabel.grid(row=1,column=0)
+        self.minutesLabel.grid(row=1, column=0)
 
         # Minutes input/entry
-        self.minutesEntry = ttk.Entry(parent, textvariable=self.minutesEntryValue)
-        self.minutesEntry.grid(row=1,column=1)
+        self.minutesEntry = ttk.Entry(parent,
+                                      textvariable=self.minutesEntryValue)
+        self.minutesEntry.grid(row=1, column=1)
 
         # Buttons
         self.cancelButton = ttk.Button(parent, text="[ESC] Cancel Shutdown",
-                   command=self.cancel_shutdown)
+                                       command=self.cancel_shutdown)
         self.cancelButton.grid(row=2, column=0)
         self.startButton = ttk.Button(parent, text="Start Shutdown Timer",
-                   command=self.shutdown)
+                                      command=self.shutdown)
         self.startButton.grid(row=2, column=1)
 
         parent.bind('<KeyPress>', self.on_key_pressed)
 
     def on_key_pressed(self, event):
-        if event.keycode == 27: # 27 = escape keycode
+        if event.keycode == 27:  # 27 = escape keycode
             self.cancel_shutdown()
 
     def shutdown(self):
         try:
             val = int(self.minutesEntryValue.get())
         except ValueError:
-            messagebox.showerror("Value error", "Minutes must be a whole number")
+            errorTitle = "Value error"
+            errorMsg = "Minutes must be a whole number"
+            messagebox.showerror(errorTitle, errorMsg)
             return
 
         if val <= 0:
@@ -52,7 +58,9 @@ class ShutdownTimerApp:
 
 def main():
     root = Tk()
-    app = ShutdownTimerApp(root)
+    ShutdownTimerApp(root)
     root.mainloop()
 
-if __name__ == "__main__": main()
+
+if __name__ == "__main__":
+    main()

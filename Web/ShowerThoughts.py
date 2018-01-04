@@ -16,7 +16,9 @@ numThoughts = int(inputNumThoughts)
 numThoughts = max(1, min(100, numThoughts))
 
 # Get listings from http request
-r = requests.get('https://www.reddit.com/r/showerthoughts/hot.json?limit={}'.format(numThoughts), headers = {'User-agent': 'showerbotpyscript 1.0'})
+url = 'https://www.reddit.com/r/showerthoughts/hot.json?limit={}'
+r = requests.get(url.format(numThoughts),
+                 headers={'User-agent': 'showerbotpyscript 1.0'})
 
 if r.status_code != 200:
     print('Warning: HTTP Status code {}', r.status_code)
