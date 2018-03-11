@@ -10,13 +10,10 @@ def firstMissingPositiveInt(arr):
     for i in range(0,len(arr)):
         if arr[0]>0:
             positives.append(False)
-    print(positives)
 
     for i in range(0,len(arr)):
         if arr[i]>0:
             positives[arr[i]-1] = True
-
-    print(positives)
 
     for i in range(0,len(positives)):
         if (positives[i]==False):
