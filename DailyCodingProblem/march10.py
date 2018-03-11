@@ -5,17 +5,24 @@
 # For example, the input [3, 4, -1, 1] should give 2.
 # The input [1, 2, 0] should give 3.
 
-def firstMissingPosInt(arr):
-    val = 0
-    changed = True
-    while changed:
-        changed = False
-        for i in range(0,len(arr)):
-            if arr[i]==val:
-                val += 1
-                changed = True
+def firstMissingPositiveInt(arr):
+    positives = []
+    for i in range(0,len(arr)):
+        if arr[0]>0:
+            positives.append(False)
+    print(positives)
 
-    return val
+    for i in range(0,len(arr)):
+        if arr[i]>0:
+            positives[arr[i]-1] = True
+
+    print(positives)
+
+    for i in range(0,len(positives)):
+        if (positives[i]==False):
+            return i+1
+
+    return len(positives)+1
 
 
-print(firstMissingPosInt([1,2,0]))
+print(firstMissingPositiveInt([1,3,4,-1]))
